@@ -2,7 +2,7 @@
 
 ## Systemöversikt
 
-Golvvärmesystemet är utformat för att simulera, styra och övervaka inomhustemperatur genom att justera vattentemperaturen i ett golvvärmesystem. Projektet inkluderar en PID-kontroller för att bibehålla önskad rumstemperatur och en ventilmodell för att reglera flödet av varmvatten beroende på utomhustemperaturen. Systemet använder en Flask-baserad backend för datahantering och visualisering samt en MQTT-broker för realtidskommunikation mellan simulering och användargränssnitt.
+Golvvärmesystemet är utformat för att simulera, styra och övervaka inomhustemperatur genom att justera vattentemperaturen i ett golvvärmesystem. Detta projekt är utformat som ett Proof of Concept (PoC) och använder simulerade sensordata för att representera verkliga förhållanden. Projektet inkluderar en PID-kontroller för att bibehålla önskad rumstemperatur och en ventilmodell för att reglera flödet av varmvatten beroende på utomhustemperaturen. Systemet använder en Flask-baserad backend för datahantering och visualisering samt en MQTT-broker för realtidskommunikation mellan simulering och användargränssnitt.
 
 ### Systemarkitektur
 
@@ -12,7 +12,7 @@ Systemet består av följande huvudkomponenter:
 
 * **PID-styrning:** Justerar vattentemperaturen baserat på inomhustemperatur och värmekurva.
 * **Ventilmodell:** Hanterar ventilens öppning för att reglera vattenflödet beroende på tryck och temperatur.
-* **MQTT-broker:** Överför sensordata och styrsignaler mellan simulatorn och backend.
+* **MQTT-broker:** Överför simulerade sensordata och styrsignaler mellan simulatorn och backend.
 * **Flask Backend:** Hanterar användargränssnitt, datauppdateringar och kommunikation med MQTT.
 * **Dashboard UI:** Visar aktuell status och historik över temperaturer och ventillägen.
 
