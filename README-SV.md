@@ -1,71 +1,89 @@
-# Golvvärme System Portfolio
+# Golvvärme Dashboard Portfolio
 
-## Systemöversikt
+## Projektöversikt
 
-Golvvärmesystemet är utformat för att simulera, styra och övervaka inomhustemperatur genom att justera vattentemperaturen i ett golvvärmesystem. Detta projekt är utformat som ett Proof of Concept (PoC) och använder simulerade sensordata för att representera verkliga förhållanden. Projektet inkluderar en PID-kontroller för att bibehålla önskad rumstemperatur och en ventilmodell för att reglera flödet av varmvatten beroende på utomhustemperaturen. Systemet använder en Flask-baserad backend för datahantering och visualisering samt en MQTT-broker för realtidskommunikation mellan simulering och användargränssnitt.
+Golvvärme Dashboard-projektet är en omfattande IoT-lösning för övervakning och styrning av golvvärmesystem. Det integrerar en PID-regulator för effektiv temperaturreglering, differentialekvationer för noggrann flödesimulering och ett användarvänligt gränssnitt för realtidsdata. Detta projekt adresserar begränsningarna i traditionella golvvärmesystem genom att erbjuda exakt temperaturkontroll, minskad energiförbrukning och ökad komfort. Projektet är ett Proof of Concept (PoC) och använder simulerade sensordata för demonstrationsändamål.
 
-### Systemarkitektur
+### Nyckelfunktioner
+
+* Realtidsövervakning av temperatur och flöde
+* Avancerad PID-baserad kontroll för optimal värmefördelning
+* Interaktiv datavisualisering genom anpassade dashboards
+* MQTT-baserad kommunikation för flexibel integration
+
+## Systemarkitektur
+
+Systemet är uppbyggt kring tre huvudkomponenter:
+
+1. **Sensorlager:** Innehåller sensorer för inomhus- och utomhustemperatur samt vattentemperatur för tillopp och retur. Dessa sensorer tillhandahåller den kritiska data som krävs för effektiv PID-styrning.
+
+2. **Simulator:** Denna komponent inkluderar en PID-regulator och en ventilmodell för att simulera vattenflödesdynamik baserat på differentialekvationer.
+
+3. **Dashboard-gränssnitt:** Ett webbaserat användargränssnitt byggt med Flask, Chart.js och anpassad CSS för realtidsvisualisering av data.
 
 ![Systemarkitektur](./golvvarme-diagram.png)
 
-Systemet består av följande huvudkomponenter:
+## Så Fungerar Det
 
-* **PID-styrning:** Justerar vattentemperaturen baserat på inomhustemperatur och värmekurva.
-* **Ventilmodell:** Hanterar ventilens öppning för att reglera vattenflödet beroende på tryck och temperatur.
-* **MQTT-broker:** Överför simulerade sensordata och styrsignaler mellan simulatorn och backend.
-* **Flask Backend:** Hanterar användargränssnitt, datauppdateringar och kommunikation med MQTT.
-* **Dashboard UI:** Visar aktuell status och historik över temperaturer och ventillägen.
+Systemet använder en PID-regulator för att upprätthålla målrummets temperatur genom att justera vattenflödet i golvvärmeslingorna. Det tar hänsyn till utomhustemperaturen för att optimera tilloppstemperaturen, vilket säkerställer komfort samtidigt som energiförbrukningen minimeras.
 
-## PID-styrning och ventilmodell
+### PID-kontroll
 
-PID-kontrollern används för att justera vattentemperaturen för att nå önskad rumstemperatur baserat på en värmekurva eller ett fast börvärde. Detta regleras med hjälp av proportional (P), integrerande (I) och deriverande (D) komponenter:
+En PID (Proportionell-Integrerande-Deriverande) regulator beräknar kontinuerligt ett felvärde som skillnaden mellan ett önskat börvärde och den uppmätta processen (rumstemperatur). Den försöker korrigera felet med tre termer:
 
-$u(t) = K_p \cdot e(t) + K_i \cdot \int e(t)dt + K_d \cdot \frac{de(t)}{dt}$
+* **Proportionell (P):** Reagerar på det aktuella felet
+* **Integrerande (I):** Tar hänsyn till tidigare fel
+* **Deriverande (D):** Förutser framtida fel
 
-Ventilmodellen reglerar flödet beroende på ventilens öppningsgrad (x) och tryckdifferens (dp):
+Denna kombination resulterar i mjuk och exakt temperaturkontroll.
 
-$Q = Kv \cdot x \cdot \sqrt{dp}$
+### Differentialekvationer
 
-Denna modell tar hänsyn till ventilens tröghet och dynamiska beteende för att simulera verkliga förhållanden.
+Systemet simulerar vattenflödet med följande ekvation:
 
-## Systemproblem och lösningar
+$$
+Q = K_v \cdot x \cdot \sqrt{\Delta P}
+$$
 
-Vanliga problem med traditionella golvvärmesystem inkluderar:
+där:
 
-* **Temperaturöverskott:** Fördröjningar i styrsystemet kan orsaka överhettning.
-* **Energislöseri:** Ineffektiv temperaturreglering kan leda till högre energiförbrukning.
-* **Långsam respons:** Golvvärmesystem reagerar långsamt på temperaturändringar.
+* $Q$ = Flödeshastighet
+* $K_v$ = Flödeskoefficient (beroende av ventilposition)
+* $x$ = Ventilposition (0-1)
+* $\Delta P$ = Tryckdifferens över ventilen
 
-Genom att använda en PID-kontroller och en ventilmodell kan dessa problem minskas genom bättre prediktion av värmebehov och snabbare justeringar.
+Denna metod säkerställer realistisk simulering av termodynamik och energiflöde.
 
-## Skärmbilder och demonstration
+## Dashboard-gränssnitt
 
-### Översikt
+Dashboarden ger en omfattande vy över golvvärmesystemets nuvarande status, inklusive:
 
-![Dashboard-översikt](./Dashboard-överview1.png)
+### Aktuella Värden
 
-### Aktuella värden
-
-![Aktuella värden](./current-values.png)
+![Aktuella Värden](./current-values.png)
 
 ### Vattenflödesgraf
 
 ![Vattenflödesgraf](./water-flow-graph.png)
 
-### Värmekurva och ventilläge
+### Värmekurva och Ventilläge
 
-![Värmekurva och ventilläge](./warming-curve-valve-position.png)
+![Värmekurva och Ventilläge](./warming-curve-valve-position.png)
 
-### Temperatur och ventilstatus
+### Temperatur och Ventilstatus
 
-![Temperatur och ventilstatus](./temperature-valve-state-graph.png)
+![Temperatur och Ventilstatus](./temperature-valve-state-graph.png)
 
-## Framtida förbättringar
+## Utmaningar med Traditionella Golvvärmesystem
 
-Några möjliga förbättringar för framtida versioner:
+Traditionella golvvärmesystem lider ofta av långsamma responstider och ineffektiv temperaturreglering på grund av den höga termiska massan i betongplattor. Detta projekt adresserar dessa utmaningar genom att använda realtidsdata och intelligenta styralgoritmer för att optimera värmefördelningen.
 
-* Anpassning av PID-parametrar för olika rum och byggnadstyper.
-* Lägga till ML-algoritmer för bättre värmeprognoser.
-* Optimerad energianvändning genom adaptiva värmekurvor.
+## Framtida Förbättringar
 
-Tack för att du tittade på detta projekt! Jag ser fram emot att vidareutveckla detta system och utforska nya sätt att förbättra energieffektiviteten i moderna byggnader.
+* Integration med smarta termostater och hemautomationssystem
+* Maskininlärning för adaptiv temperaturkontroll
+* Prediktivt underhåll och avvikelsedetektering
+
+## Slutsats
+
+Detta projekt demonstrerar potentialen för IoT och avancerade styralgoritmer för att avsevärt förbättra prestanda och energieffektivitet hos golvvärmesystem. Den modulära designen möjliggör framtida expansion och integration med andra smarta hemteknologier.
