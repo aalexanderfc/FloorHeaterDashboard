@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-The Floor Heater Dashboard project is a comprehensive IoT solution for monitoring and controlling floor heating systems. It integrates a PID controller for efficient temperature regulation, differential equations for accurate flow simulation, and a user-friendly dashboard for real-time data visualization. This project addresses the limitations of conventional floor heating systems by providing precise temperature control, reduced energy consumption, and enhanced comfort.
+The Floor Heater Dashboard project is a comprehensive IoT solution for monitoring and controlling floor heating systems. It integrates a PID controller for efficient temperature regulation, differential equations for accurate flow simulation, and a user-friendly dashboard for real-time data visualization. This project addresses the limitations of conventional floor heating systems by providing precise temperature control, reduced energy consumption, and enhanced comfort. This project is a Proof of Concept (PoC) and uses simulated sensor data for demonstration purposes.
 
 ### Key Features
 
@@ -41,14 +41,14 @@ This combination results in smooth and accurate temperature control.
 
 The system simulates water flow using the equation:
 
-$Q = K_v \cdot x \cdot \sqrt{\Delta P}$
+\$Q = K\_v \cdot x \cdot \sqrt{\Delta P}\$
 
 where:
 
-* $Q$ = Flow rate
-* $K_v$ = Flow coefficient (ventil position dependent)
-* $x$ = Valve position (0-1)
-* $\Delta P$ = Pressure differential across the valve
+* \$Q\$ = Flow rate
+* \$K\_v\$ = Flow coefficient (ventil position dependent)
+* \$x\$ = Valve position (0-1)
+* \$\Delta P\$ = Pressure differential across the valve
 
 This approach ensures realistic simulation of thermal dynamics and energy flow.
 
