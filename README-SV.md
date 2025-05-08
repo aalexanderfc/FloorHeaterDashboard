@@ -41,9 +41,7 @@ Denna kombination resulterar i mjuk och exakt temperaturkontroll.
 
 Systemet simulerar vattenflödet med följande ekvation:
 
-$$
-Q = K_v \cdot x \cdot \sqrt{\Delta P}
-$$
+\$Q = K\_v \cdot x \cdot \sqrt{\Delta P}\$
 
 där:
 
